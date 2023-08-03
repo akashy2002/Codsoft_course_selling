@@ -1,0 +1,53 @@
+{% extends 'course/base.html' %}
+{% load course_card %}
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+
+
+<div class="container my-4">
+    
+    <hr>
+    <div class="flex-row">
+    <div class="d-flex flex-column mx-4">
+{% for all in alldata %}
+<div class="container my-4">
+    <div class="d-flex">
+    <div class="card" style="width: 60rem;">
+        <img src="{{all.thumbnail.url}}" class="card-img-top" alt="..." height=300>
+        <div class="card-body">
+            <h5 class="card-title">{{all.name}}</h5>
+            <p class="card-text m-0 p-0">
+                Save {{all.discount}}%
+                    <br>
+                    <span class="price">
+                        <del>{{all.price|rupee}}</del>
+                        &nbsp;
+                        <span>{% calculate_selling_price all.price all.discount as value %}{{value | rupee}}</span>
+                    </span>
+            </p>
+        </div>
+
+        <div class="card-footer p-0">
+            <div class="row">
+                <div class="col">
+                    <a href="checkout/{{all.slug}}" class="btn btn-light w-100">Enroll Now</a>
+                </div>
+                <div class="col">
+                    <a href="course/{{all.slug}}" class="btn btn-light w-100">Show More</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+ </div>
+    {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

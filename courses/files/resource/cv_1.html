@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CV Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="cv.js"></script>
+  </head>
+  <body>
+    <header class="center">
+      <h1>CV Maker</h1>
+    </header>
+    <main>
+      <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br>
+        <label for="education">Education:</label>
+        <textarea id="education" name="education"></textarea><br>
+        <label for="work-experience">Work Experience:</label>
+        <textarea id="work-experience" name="work-experience"></textarea><br>
+        <label for="skills">Skills:</label>
+        <textarea id="skills" name="skills"></textarea><br>
+        <label for="interests">Interests:</label>
+        <textarea id="interests" name="interests"></textarea><br>
+        <input type="submit" value="Submit">
+      </form>
+    </main>
+    <!-- UI form -->
+<form id="cv-form">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" required>
+  <!-- Other form fields for input data -->
+  <button type="submit">Generate CV</button>
+</form>
+
+<!-- Script to handle form submission -->
+<script>
+  const form = document.getElementById('cv-form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    try {
+      const response = await fetch('/api/generate-cv', {
+        method: 'POST',
+        body: formData
+      });
+      const cvData = await response.json();
+      // Update UI to display CV data
+    } catch (error) {
+      console.error(error);
+    }
+  });
+</script>
+
+  </body>
+</html>

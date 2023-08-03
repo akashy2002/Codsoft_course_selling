@@ -1,0 +1,44 @@
+{% extends 'course/base.html' %}
+{% load course_card %}
+{% block title %}Checkout{% endblock title %}
+
+{% block body %}
+
+
+<div class="container my-4">
+    <h3 class="text-center">Checkout Page</h3>
+    <hr>
+   
+    <div class="d-flex flex-col justify-space-between">
+    <div class="card ml-auto" style="width: 18rem;">
+        <img src="{{course.thumbnail.url}}" class="card-img-top" alt="..." height=300>
+        <div class="card-body">
+            <h5 class="card-title">{{course.name}}</h5>
+            <p class="card-text m-0 p-0">
+                Save {{all.discount}}%
+                    <br>
+                    <span class="price">
+                        <del>{{course.price|rupee}}</del>
+                        &nbsp;
+                        <span>{% calculate_selling_price course.price course.discount as value %}{{value | rupee}}</span>
+                    </span>
+                </p>
+            </div>
+        </div>
+
+            <div class="mx-4">
+                <p class="display-5">Course : <b>{{course.name}}</b></p>
+                <hr>
+                <p>Payable Amount: {% calculate_selling_price course.price course.discount as value %}<b>{{value | rupee}}</b></p>
+                <a href="?action=create_payment" class="btn btn-light border">Continue to pay</a>
+            </div>
+            
+    </div>
+</div>
+
+</div>
+
+
+
+
+{% endblock body %}
